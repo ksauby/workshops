@@ -5,40 +5,22 @@ Introduction
 
 Materials and setup
 -------------------
+In R, type `install.packages("ggplot2")` to install the ggplot2 package.
 
-### Lab computer users: Log in using the user name and password on the board to your left.<span class="tag" data-tag-name="labsetup"></span>
+Everyone: Download workshop materials: <http://tutorials.iq.harvard.edu/R/Rgraphics.zip>
 
-### Laptop users: You should have R installed --if not:
-
-#### Open a web browser and go to <http://cran.r-project.org> and download and install it
-
-#### Also helpful to install RStudio (download from <http://rstudio.com>)
-
-#### In R, type `install.packages("ggplot2")` to install the ggplot2 package.
-
-### Everyone: Download workshop materials:
-
-#### Download materials from <http://tutorials.iq.harvard.edu/R/Rgraphics.zip>
-
-#### Extract the zip file containing the materials to your desktop
+Extract the zip file containing the materials to your desktop
 
 Workshop notes are available in .hmtl format. Open a file browser, navigate to your desktop and open Rgraphics.html
 
-Workshop Overview
+Lab Overview
 -----------------
-
-Class Structure and Organization:
 
 -   Ask questions at any time. Really!
 -   Collaboration is encouraged
--   This is your class! Special requests are encouraged
 
 </div>
 
-This is an intermediate R course:
-
--   Assumes working knowledge of R
--   Relatively fast-paced
 -   Focus is on `ggplot2` graphics--other packages will not be covered
 
 Starting A The End
