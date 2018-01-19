@@ -11,7 +11,7 @@ Everyone: Download workshop materials: <http://tutorials.iq.harvard.edu/R/Rgraph
 
 Extract the zip file containing the materials to your desktop.
 
-Workshop notes are available in .hmtl format. Open a file browser, navigate to your desktop and open Rgraphics.html
+Workshop notes are available in .hmtl format. Open a file browser, navigate to your desktop and open Rgraphics.html.
 
 Lab Overview
 -----------------
@@ -25,14 +25,16 @@ Lab Overview
 
 </div>
 
-- You are encouraged to explore the ggplot2 documentation: <http://ggplot2.tidyverse.org/reference/>. There are many useful, simple examples to help you "build" your plot. Even though I've been using ggplot2 for years, I still look at the ggplot2 documentation almost everytime I build a figure using ggplot2.
+- You are encouraged to explore the `ggplot2` documentation: <http://ggplot2.tidyverse.org/reference/>. There are many useful, simple examples to help you "build" your plot. Even though I've been using `ggplot2` for years, I still look at the `ggplot2` documentation almost every time I build a figure using `ggplot2`.
 
-Starting A The End
+Starting A The End & What to Turn In
 ------------------
 
 My goal: by the end of the lab you will be able to reproduce this graphic from the Economist:
 
 ![](images/Economist1.png)
+
+**What to turn in:** You will create the figures from Exercises 1, 2, and etc... and include them in an R markdown file. You will "knit" that R markdown file and turn that in to your TA when you are done with the lab.
 
 Why `ggplot2`?
 --------------
@@ -158,7 +160,7 @@ Base colored scatter plot example:
     geom_point()
 ```
 
-`ggplot2` excels in this example because it is **shorter, simpler, and hopefully easier for you to "read."** !
+`ggplot2` excels in this example because it is **shorter, simpler, and hopefully easier for you to "read."**
 
 Geometric Objects And Aesthetics
 ================================
@@ -284,6 +286,8 @@ The data for the exercises is available in the `dataSets/EconomistData.csv` file
 Original sources for these data are <http://www.transparency.org/content/download/64476/1031428> <http://hdrstats.undp.org/en/indicators/display_cf_xls_indicator.cfm?indicator_id=103106&lang=en>
 
 These data consist of *Human Development Index* and *Corruption Perception Index* scores for several countries.
+
+Create each of the following figures and include them in your R markdown file that you will "knit" later to create a HTML file to give to your TA when you are done with the lab. I suggest once you complete figure 5, knit your R markdown file to make sure that you are able to generate the HTML file. To get you started, use the R markdown file here, in which I have already included the figure (and code!) for Figure 1 below: .
 
 1.  Create a scatter plot with CPI on the x axis and HDI on the y axis.
 2.  Color the points in the previous plot blue.
