@@ -448,8 +448,8 @@ Exercise II
 
 **Create each of the following figures:**
 
-1.  **Create a scatter plot with CPI on the x axis and HDI on the y axis. Color the points to indicate region. Modify the x, y, and color scales so that they have more easily-understood names (e.g., spell out "Human development Index" instead of "HDI").**
-2.  **Modify the color scale to use specific values of your choosing. Hint: see `?scale_color_manual`.**
+1.  **Create a scatter plot with CPI on the x axis and HDI on the y axis. Color the points to indicate region. Modify the x and y scales so that they have more easily-understood names (i.e., HDI stands for "Human development Index" and CPI stands for "Corruption Perception Index").**
+2.  **Modify the color scale to use specific values of your choosing. Change the name of the "Region" scale from "Region" to "Region of the world." Hint: see `?scale_color_manual`.**
 
 
 
@@ -557,7 +557,7 @@ Exercise IV
 
 **Create the following figure:**
 
-1. **Create a scatterplot with CPI on the x axis, HDI on the y axis, add a straight smoothing line, and facet and color by Region. Use your own customized theme.**
+1. **Create a scatterplot with CPI on the x axis, HDI on the y axis, add a straight smoothing line, and facet and color by Region. Create your own customized theme by modifying at least two features of `theme_bw` and then plot your scatterplot using that theme.**
 
 
 # Resources
