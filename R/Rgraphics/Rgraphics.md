@@ -295,44 +295,6 @@ Create each of the following figures and include them in your R markdown file th
 4.  Create boxplots of CPI by Region
 5.  Overlay points on top of the box plots
 
-Exercise I prototype<span class="tag" data-tag-name="prototype"></span>
------------------------------------------------------------------------
-
-1.  \[@1\] Create a scatter plot with CPI on the x axis and HDI on the y axis.
-
-``` r
-  ggplot(dat, aes(x = CPI, y = HDI)) +
-    geom_point()
-```
-
-1.  \[@2\] Color the points in the previous plot blue.
-
-``` r
-  ggplot(dat, aes(x = CPI, y = HDI)) +
-    geom_point(color = "blue")
-```
-
-1.  \[@3\] Color the points in the previous plot according to *Region*.
-
-``` r
-  ggplot(dat, aes(x = CPI, y = HDI)) +
-    geom_point(aes(color = Region))
-```
-
-1.  \[@4\] Create boxplots of CPI by Region
-
-``` r
-  ggplot(dat, aes(x = Region, y = CPI)) +
-    geom_boxplot()
-```
-
-1.  \[@5\] Overlay points on top of the box plots
-
-``` r
-  ggplot(dat, aes(x = Region, y = CPI)) +
-    geom_boxplot() +
-    geom_point() 
-```
 
 Statistical Transformations
 ===========================
@@ -461,17 +423,13 @@ Common Scale Arguments
 
 The following arguments are common to most scales in ggplot2:
 
-name  
-the first argument gives the axis or legend title
+`name`: the first argument gives the axis or legend title
 
-limits  
-the minimum and maximum of the scale
+`limits`: the minimum and maximum of the scale
 
-breaks  
-the points along the scale where labels should appear
+`breaks`: the points along the scale where labels should appear
 
-labels  
-the labels that appear at each break
+`labels`: the labels that appear at each break
 
 Specific scale functions may have additional arguments; for example, the `scale_color_continuous` function has arguments `low` and `high` for setting the colors at the low and high end of the scale.
 
@@ -609,7 +567,7 @@ Faceting
 --------
 
 -   Faceting is `ggplot2` parlance for **small multiples**
--   The idea is to create separate graphs for subsets of data
+-   The idea is to create **separate** graphs for **subsets** of data
 -   `ggplot2` offers two functions for creating small multiples:
     1.  `facet_wrap()`: define subsets as the levels of a single grouping variable
     2.  `facet_grid()`: define subsets as the crossing of two grouping variables
