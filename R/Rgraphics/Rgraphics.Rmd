@@ -24,13 +24,8 @@ This tutorial was written by the Institute for Quantitative Social Science (Harv
 
 ## Materials and setup
 
-If you have not yet installed the "ggplot2" package, in R, type `install.packages("ggplot2")` to install the ggplot2 package. Unsure whether it is installed or not? Type `library(ggplot2)`. If it is not yet installed, R will give you an error.
-
-Everyone: Download workshop materials: <http://tutorials.iq.harvard.edu/R/Rgraphics.zip>
-
-Extract the zip file containing the materials to your desktop.
-
-Workshop notes are available in .hmtl format. Open a file browser, navigate to your desktop and open Rgraphics.html.
+1. You will need to have the `ggplot2` package installed for this lab. Unsure whether it is installed or not? Type `library(ggplot2)`. If it is not yet installed, R will give you an error. If you have not yet installed the "ggplot2" package, in R, type `install.packages("ggplot2")` to install.
+2. Download the "dataSets" and save it to the working directory you are working in in RStudio (I suggest you save it to a "Statistics_lab" folder).
 
 ## Lab Overview
 
@@ -39,16 +34,15 @@ Ask questions at any time. Really!
 Collaboration is encouraged
 
 Focus is on
-1) `ggplot2` graphics--other packages will not be covered
-2) 
 
-</div>
+1. `ggplot2` graphics--other packages will not be covered
+2. being able to generate a report with the figures you have created (in HTML format) by using R markdown.
 
-- You are encouraged to explore the `ggplot2` documentation: <http://ggplot2.tidyverse.org/reference/>. There are many useful, simple examples to help you "build" your plot. Even though I have been using `ggplot2` for years, I still look at the `ggplot2` documentation almost every time I build a figure using `ggplot2`.
+You are encouraged to explore the `ggplot2` documentation: <http://ggplot2.tidyverse.org/reference/>. There are many useful, simple examples to help you "build" your plot. Even though I have been using `ggplot2` for years, I still look at the `ggplot2` documentation almost every time I build a figure using `ggplot2`!
 
 ## What to Turn In
 
-**What to turn in: You will create the figures from Exercises I, II, and III and include them in an R markdown file. You will "knit" that R markdown file and turn that in to your TA when you are done with the lab.**
+**Create the figures from Exercises I, II, III, IV, and V and include them in an R markdown file. Then "knit" that R markdown file to create an HTML file;  submit the HTML file to your TA via Canvas (submit via this assignment, specifically: <https://ufl.instructure.com/courses/347379/assignments/3464833>) when you are done with the lab.**
 
 ## Why `ggplot2`?
 
@@ -77,47 +71,51 @@ The basic idea: independently specify plot building blocks and combine them to c
 ## The structure of a `ggplot`
 
 
-The `ggplot()` function is used to initialize the basic graph structure, then we add to it. The structure of a ggplot looks like this:
+The `ggplot()` function is used to initialize the basic graph structure, then we add to it.  **In other words, we specifying different parts of the plot, and add them together using the `+` operator.** The structure of the code used to create a plot using `ggplot2` looks like this:
 
-```{r, eval=F}
+```r
+# here we tell ggplot2 what data we are using, what our x and y variables are called in that dataset
   ggplot(
-	  data = <default data set>, 
+	  data = default_data_set, 
          aes(
-			 x = <default x axis variable>,
-             y = <default y axis variable>,
-             ... <other default aesthetic mappings>
+			 x = default_x_axis_variable,
+             y = default_y_axis_variable,
+             ...
 		),
-        ... <other plot defaults>
+        ...
   ) +
 
-         geom_<geom type>(
+  		# here we start building our plot
+         geom_GEOMTYPE(
 			 aes(
-				 size = <size variable for this geom>, 
-                 ... <other aesthetic mappings>
+				 size = size_variable_for_this_geom, 
+                 ...
 			 ),
-             data = <data for this point geom>,
-             stat = <statistic string or function>,
-             position = <position string or function>,
-             color = <"fixed color specification">,
-             <other arguments, possibly passed to the _stat_ function
+             data = data_for_this_point_geom,
+             stat = statistic,
+             position = position,
+             color = "COLOR",
+             ...
 		 ) +
 
-   	  	scale_<aesthetic>_<type>(
-			name = <"scale label">,
-			breaks = <where to put tick marks>,
-            labels = <labels for tick marks>,
-            ... <other options for the scale>
+   	  	scale_AESTHETICTYPE(
+			name = "scale label",
+			breaks = where_to_put_tick_marks,
+            labels = labels_for_tick_marks,
+            ...
 		) +
-
+		# here we can dicate how we want our overall plot to appear
     	theme(
 			plot.background = element_rect(fill = "gray"),
-          	... <other theme elements>
+          	...
 		)
 ```
 
-Don't be afraid, you will understand this by the end of the lab! **The basic idea is that you specify different parts of the plot, and add them together using the `+` operator.**
+
 
 ## Example Data: `Housing prices`
+
+Note that from this point on, you should be able to re-create all figures displayed in this file by copying and pasting the code from the *grey boxes* into the Console in RStudio. Anything that R prints as a result of the code (including warnings and comments) is shown in the white boxes that immediately follow the grey boxes.
 
 Let's look at housing prices.
 
@@ -133,7 +131,7 @@ Let's look at housing prices.
 
 Compared to base graphics, `ggplot2`
 
--   is more verbose for simple / canned graphics
+-   is more verbose for simple graphics
 -   is less verbose for complex / custom graphics
 -   does not have methods (data should always be in a `data.frame`)
 -   uses a different system for adding plot elements
@@ -313,15 +311,15 @@ Original sources for these data are <http://www.transparency.org/content/downloa
 
 These data consist of *Human Development Index* and *Corruption Perception Index* scores for several countries.
 
-**You will create an R markdown file that you will "knit" later to create a HTML file to give to your TA when you are done with the lab. I suggest once you complete figure 5, knit your R markdown file to make sure that you are able to generate the HTML file. To get started, use the R markdown file here, in which I have already included the code for Figure 1 below.**
+**You will create an R markdown file that you will "knit" later to create a HTML file to give to your TA when you are done with the lab. I suggest once you complete figure 5, knit your R markdown file to make sure that you are able to generate the HTML file. To get started, download and start with this R markdown file (<https://github.com/ksauby/workshops/blob/master/R/Rgraphics/example.Rmd>), in which I have already included the code for Figure 1 below.**
 
-**Create each of the following figures and include **
+**Create each of the following figures:**
 
 1.  **Create a scatter plot with CPI on the x axis and HDI on the y axis.**
 2.  **Color the points in the previous plot blue.**
 3.  **Color the points in the previous plot according to *Region*.**
-4.  **Create boxplots of CPI by Region**
-5.  **Overlay points on top of the box plots**
+4.  **Make the size of the points bigger by setting size to 2.**
+5.  **Make the size of the points proportional to HDI.Rank.**
 
 
 Statistical Transformations
@@ -375,9 +373,10 @@ What is the problem with the previous plot? Basically we take binned and summari
 Exercise II
 -----------
 
-1.  Re-create a scatter plot with CPI on the x axis and HDI on the y axis (as you did in the previous exercise).
-2.  Overlay a *straight* smoothing line on top of the scatter plot using the *lm* method. Hint: see `?stat_smooth`.
-3.  Overlay a smoothing line on top of the scatter plot using the default method.
+**Create each of the following figures:**
+
+1.  **Re-create a scatter plot with CPI on the x axis and HDI on the y axis (as you did in the previous exercise). Overlay a smoothing line on top of the scatter plot using the default method.**
+2.  **Overlay a *straight* smoothing line on top of the scatter plot using the *lm* method. Hint: see `?stat_smooth`.**
 
 Scales
 ======
@@ -483,9 +482,11 @@ Note that in RStudio you can type `scale_` followed by TAB to get the whole list
 Exercise III
 ------------
 
-1.  Create a scatter plot with CPI on the x axis and HDI on the y axis. Color the points to indicate region.
-2.  Modify the x, y, and color scales so that they have more easily-understood names (e.g., spell out "Human development Index" instead of "HDI").
-3.  Modify the color scale to use specific values of your choosing. Hint: see `?scale_color_manual`.
+**Create each of the following figures:**
+
+1.  **Create a scatter plot with CPI on the x axis and HDI on the y axis. Color the points to indicate region.**
+2.  **Modify the x, y, and color scales so that they have more easily-understood names (e.g., spell out "Human development Index" instead of "HDI").**
+3.  **Modify the color scale to use specific values of your choosing. Hint: see `?scale_color_manual`.**
 
 
 
@@ -526,7 +527,9 @@ There is also a `facet_grid()` function for faceting in two dimensions.
 Exercise IV
 ------------
 
-1. Create a scatterplot with CPI on the x axis, HDI on the y axis, add a straight smoothing line, and facet and color by Region.
+**Create the following figure:**
+
+1. **Create a scatterplot with CPI on the x axis, HDI on the y axis, add a straight smoothing line, and facet and color by Region.**
 
 
 
@@ -587,44 +590,27 @@ If you create a custom theme, think about the following: will others be able to 
 Exercise V
 ------------
 
+**Create the following figure:**
 
-The \#1 FAQ
-===========
-
-Map Aesthetic To Different Columns
-----------------------------------
-
-The most frequently asked question goes something like this: *I have two variables in my data.frame, and I'd like to plot them as separate points, with different color depending on which variable it is. How do I do that?*
-
-### Wrong
-
-```{r}
-  housing.byyear <- aggregate(cbind(Home.Value, Land.Value) ~ Date, data = housing, mean)
-  ggplot(housing.byyear,
-         aes(x=Date)) +
-    geom_line(aes(y=Home.Value), color="red") +
-    geom_line(aes(y=Land.Value), color="blue")
+1. **Create a scatterplot with CPI on the x axis, HDI on the y axis, add a straight smoothing line, and facet and color by Region. Use your own customized theme.**
 
 
-  #
-```
+# Resources
 
-### Right
+## General information about specifying types of points and lines and colors: https://www.statmethods.net/advgraphs/parameters.html
 
-```{r}
-  library(tidyr)
-  home.land.byyear <- gather(housing.byyear,
-                             value = "value",
-                             key = "type",
-                             Home.Value, Land.Value)
-  ggplot(home.land.byyear,
-         aes(x=Date,
-             y=value,
-             color=type)) +
-    geom_line()
-```
+## ggplot2
 
-Putting It All Together Challenge: Recreate This `Economist` Graph
+- http://ggplot2.tidyverse.org/index.html
+
+## Markdown
+
+- R Markdown, http://rmarkdown.rstudio.com/index.html
+- Creating HTML documents in R Markdown, http://rmarkdown.rstudio.com/html_document_format.html
+- Markdown cheat sheet, https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+
+
+Optional Challenge for Motivated Students: Recreate This `Economist` Graph
 =======================
 
 [file:images/Economist1.pdf](images/Economist1.pdf)
@@ -649,17 +635,17 @@ Lets start by creating the basic scatter plot, then we can make a list of things
 
 To complete this graph we need to:
 
--   \[ \] add a trend line
--   \[ \] change the point shape to open circle
--   \[ \] change the order and labels of Region
--   \[ \] label select points
--   \[ \] fix up the tick marks and labels
--   \[ \] move color legend to the top
--   \[ \] title, label axes, remove legend title
--   \[ \] theme the graph with no vertical guides
--   \[ \] add model R<sup>2</sup> (hard)
--   \[ \] add sources note (hard)
--   \[ \] final touches to make it perfect (use image editor for this)
+- add a trend line
+- change the point shape to open circle
+- change the order and labels of Region
+- label select points
+- fix up the tick marks and labels
+- move color legend to the top
+- title, label axes, remove legend title
+- theme the graph with no vertical guides
+- add model R<sup>2</sup> (hard)
+- add sources note (hard)
+- final touches to make it perfect (use image editor for this)
 
 Adding the trend line
 ---------------------
@@ -865,4 +851,6 @@ And here it is, our final version!
 
 ![](images/econScatter10.png)
 
-Comparing it to the original suggests that we've got most of the important elements, though of course the two graphs are not identical. ![](images/Economist1.png)
+Comparing it to the original suggests that we've got most of the important elements, though of course the two graphs are not identical.
+
+![](images/Economist1.png)
