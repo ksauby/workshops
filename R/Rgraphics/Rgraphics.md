@@ -5,11 +5,11 @@ Introduction
 
 Materials and setup
 -------------------
-In R, type `install.packages("ggplot2")` to install the ggplot2 package.
+If you have not yet installed the "ggplot2" package, in R, type `install.packages("ggplot2")` to install the ggplot2 package. Unsure whether it is installed or not? Type `library(ggplot2)`. If it is not yet installed, R will give you an error.
 
 Everyone: Download workshop materials: <http://tutorials.iq.harvard.edu/R/Rgraphics.zip>
 
-Extract the zip file containing the materials to your desktop
+Extract the zip file containing the materials to your desktop.
 
 Workshop notes are available in .hmtl format. Open a file browser, navigate to your desktop and open Rgraphics.html
 
@@ -23,10 +23,14 @@ Lab Overview
 
 -   Focus is on `ggplot2` graphics--other packages will not be covered
 
+</div>
+
+- You are encouraged to explore the ggplot2 documentation: <http://ggplot2.tidyverse.org/reference/>. There are many useful, simple examples to help you "build" your plot. Even though I've been using ggplot2 for years, I still look at the ggplot2 documentation almost everytime I build a figure using ggplot2.
+
 Starting A The End
 ------------------
 
-My goal: by the end of the workshop you will be able to reproduce this graphic from the Economist:
+My goal: by the end of the lab you will be able to reproduce this graphic from the Economist:
 
 ![](images/Economist1.png)
 
@@ -41,12 +45,6 @@ Advantages of ggplot2
 -   theme system for polishing plot appearance
 -   mature and complete graphics system
 -   many users, active mailing list
-
-That said, there are some things you cannot (or should not) do With ggplot2:
-
--   3-dimensional graphics (see the rgl package)
--   Graph-theory type graphs (nodes/edges layout; see the igraph package)
--   Interactive graphics (see the ggvis package)
 
 What Is The Grammar Of Graphics?
 --------------------------------
@@ -91,7 +89,7 @@ The `ggplot()` function is used to initialize the basic graph structure, then we
           ... <other theme elements>)
 ```
 
-Don't be afraid, you will understand this by the end of the workshop! The basic idea is that you specify different parts of the plot, and add them together using the `+` operator.
+Don't be afraid, you will understand this by the end of the lab! **The basic idea is that you specify different parts of the plot, and add them together using the `+` operator.**
 
 Example Data: `Housing prices`
 ------------------------------
@@ -132,7 +130,7 @@ Base graphics histogram example:
     geom_histogram()
 ```
 
-Base wins!
+In this scenario, it is easier to use the "base" graphics because the code is **shorter and simpler.**
 
 `ggplot2` Base graphics VS `ggplot` for more complex graphs:
 ------------------------------------------------------------
@@ -160,7 +158,7 @@ Base colored scatter plot example:
     geom_point()
 ```
 
-`ggplot2` wins!
+`ggplot2` excels in this example because it is **shorter, simpler, and hopefully easier for you to "read."** !
 
 Geometric Objects And Aesthetics
 ================================
