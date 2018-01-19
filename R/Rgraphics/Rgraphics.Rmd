@@ -42,7 +42,7 @@ You are encouraged to explore the `ggplot2` documentation: <http://ggplot2.tidyv
 
 ## What to Turn In
 
-**Create the figures from Exercises I, II, III, IV, and V and include them in an R markdown file. Then "knit" that R markdown file to create an HTML file;  submit the HTML file to your TA via Canvas (submit via this assignment, specifically: <https://ufl.instructure.com/courses/347379/assignments/3464833>) when you are done with the lab.**
+**Create the figures from Exercises I, II, III, and IV and include them in an R markdown file. Then "knit" that R markdown file to create an HTML file;  submit the HTML file to your TA via Canvas (submit via this assignment, specifically: <https://ufl.instructure.com/courses/347379/assignments/3464833>) when you are done with the lab.**
 
 ## Why `ggplot2`?
 
@@ -320,63 +320,8 @@ These data consist of *Human Development Index* and *Corruption Perception Index
 3.  **Color the points in the previous plot according to *Region*.**
 4.  **Make the size of the points bigger by setting size to 2.**
 5.  **Make the size of the points proportional to HDI.Rank.**
-
-
-Statistical Transformations
-===========================
-
-Some plot types (such as scatterplots) do not require transformations--each point is plotted at x and y coordinates equal to the original value. Other plots, such as boxplots, histograms, prediction lines etc. require statistical transformations:
-
--   for a boxplot the y values must be transformed to the median and 1.5(IQR)
--   for a smoother smother the y values must be transformed into predicted values
-
-
-Setting Statistical Transformation Arguments
---------------------------------------------
-
-For example, here is the default histogram of Home.Value:
-
-```{r}
-  p2 <- ggplot(housing, aes(x = Home.Value))
-  p2 + geom_histogram()
-```
-
-The binwidth looks reasonable by default, but we can change it by passing the `binwidth` argument to the `stat_bin` function:
-
-```{r}
-  p2 + geom_histogram(stat = "bin", binwidth=4000)
-```
-
-Changing The Statistical Transformation
----------------------------------------
-
-Sometimes the default statistical transformation is not what you need. This is often the case with pre-summarized data:
-
-```{r}
-  housing.sum <- aggregate(housing["Home.Value"], housing["State"], FUN=mean)
-  rbind(head(housing.sum), tail(housing.sum))
-```
-
-```{r, eval=F}
-ggplot(housing.sum, aes(x=State, y=Home.Value)) + 
-  geom_bar()
-Error: stat_count() must not be used with a y aesthetic.
-```
-
-What is the problem with the previous plot? Basically we take binned and summarized data and ask ggplot to bin and summarize it again (remember, `geom_bar` defaults to `stat ` stat<sub>count</sub>=); obviously this will not work. We can fix it by telling `geom_bar` to use a different statistical transformation function:
-
-```{r}
-  ggplot(housing.sum, aes(x=State, y=Home.Value)) + 
-    geom_bar(stat="identity")
-```
-
-Exercise II
------------
-
-**Create each of the following figures:**
-
-1.  **Re-create a scatter plot with CPI on the x axis and HDI on the y axis (as you did in the previous exercise). Overlay a smoothing line on top of the scatter plot using the default method.**
-2.  **Overlay a *straight* smoothing line on top of the scatter plot using the *lm* method. Hint: see `?stat_smooth`.**
+6.  **Re-create a scatter plot with CPI on the x axis and HDI on the y axis (as you did in the previous exercise). Overlay a smoothing line on top of the scatter plot using the default method.**
+7.  **Overlay a *straight* smoothing line on top of the scatter plot using the *lm* method. Hint: see `?stat_smooth`.**
 
 Scales
 ======
@@ -384,7 +329,7 @@ Scales
 Scales: Controlling Aesthetic Mapping
 -------------------------------------
 
-Aesthetic mapping (i.e., with `aes()`) only says that a variable should be mapped to an aesthetic. It doesn't say *how* that should happen. For example, when mapping a variable to *shape* with `aes(shape ` x)= you don't say *what* shapes should be used. Similarly, `aes(color ` z)= doesn't say *what* colors should be used. Describing what colors/shapes/sizes etc. to use is done by modifying the corresponding *scale*. In `ggplot2` scales include
+Aesthetic mapping (i.e., with `aes()`) only says that a variable should be mapped to an aesthetic. It doesn't say *how* that should happen. Describing what colors/shapes/sizes etc. to use is done by modifying the corresponding *scale*. In `ggplot2` scales include
 
 -   position
 -   color and fill
@@ -442,7 +387,7 @@ Next change the low and high values to blue and red:
 
 ```
 
-We can use the function `muted` from the `scales` package to modify red and blue values.
+We can use the function `muted` from the `scales` package to modify colors.
 
 First, install the `scales` package:
 
@@ -479,14 +424,13 @@ You can browse the available scales here: <http://ggplot2.tidyverse.org/referenc
 
 Note that in RStudio you can type `scale_` followed by TAB to get the whole list of available scales.
 
-Exercise III
+Exercise II
 ------------
 
 **Create each of the following figures:**
 
-1.  **Create a scatter plot with CPI on the x axis and HDI on the y axis. Color the points to indicate region.**
-2.  **Modify the x, y, and color scales so that they have more easily-understood names (e.g., spell out "Human development Index" instead of "HDI").**
-3.  **Modify the color scale to use specific values of your choosing. Hint: see `?scale_color_manual`.**
+1.  **Create a scatter plot with CPI on the x axis and HDI on the y axis. Color the points to indicate region. Modify the x, y, and color scales so that they have more easily-understood names (e.g., spell out "Human development Index" instead of "HDI").**
+2.  **Modify the color scale to use specific values of your choosing. Hint: see `?scale_color_manual`.**
 
 
 
@@ -496,14 +440,14 @@ Faceting
 -   Faceting is `ggplot2` parlance for **small multiples**
 -   The idea is to create **separate** graphs for **subsets** of data
 -   `ggplot2` offers two functions for creating small multiples:
-    1.  `facet_wrap()`: define subsets as the levels of a single grouping variable
-    2.  `facet_grid()`: define subsets as the crossing of two grouping variables
--   Facilitates comparison among plots, not just of geoms within a plot
+    1.  `facet_wrap()`: define subsets as the levels of a *single* grouping variable
+    2.  `facet_grid()`: define subsets as the crossing of *two* grouping variables
+-   Facilitates comparison among groups within a dataset
 
 What is the trend in housing prices in each state?
 --------------------------------------------------
 
--   Start by using a technique we already know--map State to color:
+Here we will work to compare the trend in housing prices among different US states. Start by using a technique we already know--map State to color:
 
 ```{r}
   p5 <- ggplot(housing, aes(x = Date, y = Home.Value))
@@ -522,9 +466,11 @@ We can remedy the deficiencies of the previous plot by faceting by state rather 
      facet_wrap(~State, ncol = 10))
 ```
 
+Are there any states that jump out to you as outliers, i.e., as having different relationships between date and home value, compared to other states?
+
 There is also a `facet_grid()` function for faceting in two dimensions.
 
-Exercise IV
+Exercise III
 ------------
 
 **Create the following figure:**
@@ -587,7 +533,7 @@ You can create new themes, as in the following example:
 
 If you create a custom theme, think about the following: will others be able to read it? How will it look when printed? 
 
-Exercise V
+Exercise IV
 ------------
 
 **Create the following figure:**
@@ -597,7 +543,7 @@ Exercise V
 
 # Resources
 
-## General information about specifying types of points and lines and colors: https://www.statmethods.net/advgraphs/parameters.html
+- General information about specifying types of points and lines and colors: https://www.statmethods.net/advgraphs/parameters.html
 
 ## ggplot2
 
@@ -613,11 +559,9 @@ Exercise V
 Optional Challenge for Motivated Students: Recreate This `Economist` Graph
 =======================
 
-[file:images/Economist1.pdf](images/Economist1.pdf)
-
 Graph source: <http://www.economist.com/node/21541178>
 
-Building off of the graphics you created in the previous exercises, put the finishing touches to make it as close as possible to the original economist graph.
+Building off of the graphics you created in the previous exercises, put the finishing touches to make it as close as possible to this original graph from *The Economist* magazine:
 
 ![](images/Economist1.png)
 
