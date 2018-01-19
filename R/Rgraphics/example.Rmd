@@ -1,0 +1,21 @@
+---
+title: "PCB 3601C Statistics Lab"
+author: "YOUR NAME"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Exercise 1
+
+## Figure 1
+
+```{r}
+# Create a scatterplot with CPI on the x axis and HDI on the y axis
+ggplot(dat, aes(x=CPI, y=HDI))+geom_point()
+```
+
+## Figure 2

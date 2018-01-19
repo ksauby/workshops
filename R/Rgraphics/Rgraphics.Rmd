@@ -1,4 +1,6 @@
 <!--
+rmarkdown::render('example.Rmd')
+
 rmarkdown::render('Rgraphics.Rmd')
 housing <- read.csv("dataSets/landdata-states.csv")
 # knitr::knit2html
@@ -20,25 +22,21 @@ Workshop notes are available in .hmtl format. Open a file browser, navigate to y
 
 ## Lab Overview
 
+Ask questions at any time. Really!
 
--   Ask questions at any time. Really!
--   Collaboration is encouraged
+Collaboration is encouraged
 
-</div>
-
--   Focus is on `ggplot2` graphics--other packages will not be covered
+Focus is on
+1) `ggplot2` graphics--other packages will not be covered
+2) 
 
 </div>
 
 - You are encouraged to explore the `ggplot2` documentation: <http://ggplot2.tidyverse.org/reference/>. There are many useful, simple examples to help you "build" your plot. Even though I have been using `ggplot2` for years, I still look at the `ggplot2` documentation almost every time I build a figure using `ggplot2`.
 
-## Starting At The End & What to Turn In
+## What to Turn In
 
-My goal: by the end of the lab you will be able to reproduce this graphic from the Economist:
-
-![](images/Economist1.png)
-
-**What to turn in:** You will create the figures from Exercises 1, 2, and etc... and include them in an R markdown file. You will "knit" that R markdown file and turn that in to your TA when you are done with the lab.
+**What to turn in: You will create the figures from Exercises 1, 2, and etc... and include them in an R markdown file. You will "knit" that R markdown file and turn that in to your TA when you are done with the lab.**
 
 ## Why `ggplot2`?
 
@@ -70,27 +68,39 @@ The basic idea: independently specify plot building blocks and combine them to c
 The `ggplot()` function is used to initialize the basic graph structure, then we add to it. The structure of a ggplot looks like this:
 
 ```{r, eval=F}
-  ggplot(data = <default data set>, 
-         aes(x = <default x axis variable>,
+  ggplot(
+	  data = <default data set>, 
+         aes(
+			 x = <default x axis variable>,
              y = <default y axis variable>,
-             ... <other default aesthetic mappings>),
-         ... <other plot defaults>) +
+             ... <other default aesthetic mappings>
+		),
+        ... <other plot defaults>
+  ) +
 
-         geom_<geom type>(aes(size = <size variable for this geom>, 
-                        ... <other aesthetic mappings>),
-                    data = <data for this point geom>,
-                    stat = <statistic string or function>,
-                    position = <position string or function>,
-                    color = <"fixed color specification">,
-                    <other arguments, possibly passed to the _stat_ function) +
+         geom_<geom type>(
+			 aes(
+				 size = <size variable for this geom>, 
+                 ... <other aesthetic mappings>
+			 ),
+             data = <data for this point geom>,
+             stat = <statistic string or function>,
+             position = <position string or function>,
+             color = <"fixed color specification">,
+             <other arguments, possibly passed to the _stat_ function
+		 ) +
 
-    scale_<aesthetic>_<type>(name = <"scale label">,
-                       breaks = <where to put tick marks>,
-                       labels = <labels for tick marks>,
-                       ... <other options for the scale>) +
+   	  	scale_<aesthetic>_<type>(
+			name = <"scale label">,
+			breaks = <where to put tick marks>,
+            labels = <labels for tick marks>,
+            ... <other options for the scale>
+		) +
 
-    theme(plot.background = element_rect(fill = "gray"),
-          ... <other theme elements>)
+    	theme(
+			plot.background = element_rect(fill = "gray"),
+          	... <other theme elements>
+		)
 ```
 
 Don't be afraid, you will understand this by the end of the lab! **The basic idea is that you specify different parts of the plot, and add them together using the `+` operator.**
@@ -202,7 +212,7 @@ You can get a list of available geometric objects using the code below
 
 OR simply type `geom_<tab>` in any good R IDE (such as Rstudio or ESS) to see a list of functions starting with `geom_`
 
-OR browsing the documentation website, <http://ggplot2.tidyverse.org/reference/>.
+**OR browsing the documentation website, <http://ggplot2.tidyverse.org/reference/>. (This is the option I usually use!)**
 
 Points (Scatterplot)
 --------------------
@@ -285,17 +295,21 @@ The data for the exercises is available in the `dataSets/EconomistData.csv` file
   dat <- read.csv("dataSets/EconomistData.csv")
 ```
 
+(To read it in properly make sure that you have set your working directory to folder in which you have saved the "dataSets" folder!)
+
 Original sources for these data are <http://www.transparency.org/content/download/64476/1031428> <http://hdrstats.undp.org/en/indicators/display_cf_xls_indicator.cfm?indicator_id=103106&lang=en>
 
 These data consist of *Human Development Index* and *Corruption Perception Index* scores for several countries.
 
-Create each of the following figures and include them in your R markdown file that you will "knit" later to create a HTML file to give to your TA when you are done with the lab. I suggest once you complete figure 5, knit your R markdown file to make sure that you are able to generate the HTML file. To get you started, use the R markdown file here, in which I have already included the figure (and code!) for Figure 1 below: .
+**You will create an R markdown file that you will "knit" later to create a HTML file to give to your TA when you are done with the lab. I suggest once you complete figure 5, knit your R markdown file to make sure that you are able to generate the HTML file. To get started, use the R markdown file here, in which I have already included the code for Figure 1 below.
+
+Create each of the following figures and include 
 
 1.  Create a scatter plot with CPI on the x axis and HDI on the y axis.
 2.  Color the points in the previous plot blue.
 3.  Color the points in the previous plot according to *Region*.
 4.  Create boxplots of CPI by Region
-5.  Overlay points on top of the box plots
+5.  Overlay points on top of the box plots**
 
 
 Statistical Transformations
@@ -577,6 +591,7 @@ You can create new themes, as in the following example:
 
 If you create a custom theme, think about the following: will others be able to read it? How will it look when printed? 
 
+
 The \#1 FAQ
 ===========
 
@@ -613,11 +628,8 @@ The most frequently asked question goes something like this: *I have two variabl
     geom_line()
 ```
 
-Putting It All Together
+Putting It All Together Challenge: Recreate This `Economist` Graph
 =======================
-
-Challenge: Recreate This `Economist` Graph
-------------------------------------------
 
 [file:images/Economist1.pdf](images/Economist1.pdf)
 
@@ -632,7 +644,7 @@ Challenge Solution<span class="tag" data-tag-name="prototype"></span>
 
 Lets start by creating the basic scatter plot, then we can make a list of things that need to be added or changed. The basic plot loogs like this:
 
-``` r
+```{r}
   dat <- read.csv("dataSets/EconomistData.csv")
 
   pc1 <- ggplot(dat, aes(x = CPI, y = HDI, color = Region))
