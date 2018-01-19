@@ -11,7 +11,7 @@ output:
 <!--
 rmarkdown::render('example.Rmd')
 
-rmarkdown::render('Rgraphics.Rmd')
+rmarkdown::render('Intro_to_R_markdown_and_ggplot2.Rmd')
 housing <- read.csv("dataSets/landdata-states.csv")
 # knitr::knit2html
 -->
@@ -24,16 +24,23 @@ This tutorial was written by the Institute for Quantitative Social Science (Harv
 
 ## Materials and setup
 
+1. If you have not already done so, create a folder on your computer in which to save all of the files related to this class (I named mine "PCB3601C").
+1. Within that folder, create a folder for this lab (I named mine "R_lab").
+1. Move the "dataSets.zip" folder there and unzip it.
+1. Open RStudio and set the working directory to PCB3601C/R_lab.
+	a) go to the "Session" dropdown menu
+	b) select "set working directory"
+	c) select "choose directory"
+	d) navigate to the folder for this lab
 1. You will need to have the `ggplot2` package installed for this lab. Unsure whether it is installed or not? Type `library(ggplot2)`. If it is not yet installed, R will give you an error. If you have not yet installed the "ggplot2" package, in R, type `install.packages("ggplot2")` to install.
-2. Download the "dataSets" and save it to the working directory you are working in in RStudio (I suggest you save it to a "Statistics_lab" folder).
 
 ## Lab Overview
 
-Ask questions at any time. Really!
+Please make sure to read through the tutorial and instructions. Have a question *after* reading through this? Feel free to ask.
 
-Collaboration is encouraged
+Collaboration is encouraged.
 
-Focus is on
+The focus of today's lab includes
 
 1. `ggplot2` graphics--other packages will not be covered
 2. being able to generate a report with the figures you have created (in HTML format) by using R markdown.
@@ -44,6 +51,18 @@ You are encouraged to explore the `ggplot2` documentation: <http://ggplot2.tidyv
 
 **Create the figures from Exercises I, II, III, and IV and include them in an R markdown file. Then "knit" that R markdown file to create an HTML file;  submit the HTML file to your TA via Canvas (submit via this assignment, specifically: <https://ufl.instructure.com/courses/347379/assignments/3464833>) when you are done with the lab.**
 
+## Why R Markdown?
+
+R Markdown is a great way to write a report that can include R results, figures, and regular text without having to save separate files. This can be much easier than writing a report directly in Word and dragging individual figures over; also, if you have to update anything you have done summarizing your data (e.g., statistical output or even calculating a simple mean) you do not have to manually update it. Just edit your R markdown file and "knit" again to either HTML or Word, and voila, R has done the work for you!
+
+In this lab we will use R Markdown to organize figures created from this lab into *one* HTML file that will be turned in to your TA. You do not have to worry about saving each individual file to a specific place and then dragging them into a Word document; R will create one file including them all.
+ 
+Here are some good resources about R markdown:
+
+- R Markdown, http://rmarkdown.rstudio.com/index.html
+- Creating HTML documents in R Markdown, http://rmarkdown.rstudio.com/html_document_format.html
+- Markdown cheat sheet, https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+ 
 ## Why `ggplot2`?
 
 Advantages of ggplot2
