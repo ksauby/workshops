@@ -1,3 +1,13 @@
+---
+title: "An Introduction to ggplot2 (Grammar of Graphics) and R Markdown"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+ html_document:
+  toc: true
+  toc_depth: 2
+---
+
+
 <!--
 rmarkdown::render('example.Rmd')
 
@@ -5,6 +15,8 @@ rmarkdown::render('Rgraphics.Rmd')
 housing <- read.csv("dataSets/landdata-states.csv")
 # knitr::knit2html
 -->
+
+This tutorial was written by the Institute for Quantitative Social Science (Harvard University) and modified for this lab by Kristen Sauby.
 
 # Introduction
 
@@ -36,7 +48,7 @@ Focus is on
 
 ## What to Turn In
 
-**What to turn in: You will create the figures from Exercises 1, 2, and etc... and include them in an R markdown file. You will "knit" that R markdown file and turn that in to your TA when you are done with the lab.**
+**What to turn in: You will create the figures from Exercises I, II, and III and include them in an R markdown file. You will "knit" that R markdown file and turn that in to your TA when you are done with the lab.**
 
 ## Why `ggplot2`?
 
@@ -301,15 +313,15 @@ Original sources for these data are <http://www.transparency.org/content/downloa
 
 These data consist of *Human Development Index* and *Corruption Perception Index* scores for several countries.
 
-**You will create an R markdown file that you will "knit" later to create a HTML file to give to your TA when you are done with the lab. I suggest once you complete figure 5, knit your R markdown file to make sure that you are able to generate the HTML file. To get started, use the R markdown file here, in which I have already included the code for Figure 1 below.
+**You will create an R markdown file that you will "knit" later to create a HTML file to give to your TA when you are done with the lab. I suggest once you complete figure 5, knit your R markdown file to make sure that you are able to generate the HTML file. To get started, use the R markdown file here, in which I have already included the code for Figure 1 below.**
 
-Create each of the following figures and include 
+**Create each of the following figures and include **
 
-1.  Create a scatter plot with CPI on the x axis and HDI on the y axis.
-2.  Color the points in the previous plot blue.
-3.  Color the points in the previous plot according to *Region*.
-4.  Create boxplots of CPI by Region
-5.  Overlay points on top of the box plots**
+1.  **Create a scatter plot with CPI on the x axis and HDI on the y axis.**
+2.  **Color the points in the previous plot blue.**
+3.  **Color the points in the previous plot according to *Region*.**
+4.  **Create boxplots of CPI by Region**
+5.  **Overlay points on top of the box plots**
 
 
 Statistical Transformations
@@ -323,8 +335,6 @@ Some plot types (such as scatterplots) do not require transformations--each poin
 
 Setting Statistical Transformation Arguments
 --------------------------------------------
-
-Arguments to `stat_` functions can be passed through `geom_` functions. This can be slightly annoying because in order to change it you have to first determine which stat the geom uses, then determine the arguments to that stat.
 
 For example, here is the default histogram of Home.Value:
 
@@ -366,9 +376,8 @@ Exercise II
 -----------
 
 1.  Re-create a scatter plot with CPI on the x axis and HDI on the y axis (as you did in the previous exercise).
-2.  Overlay a smoothing line on top of the scatter plot using the *lm* method. Hint: see `?stat_smooth`.
+2.  Overlay a *straight* smoothing line on top of the scatter plot using the *lm* method. Hint: see `?stat_smooth`.
 3.  Overlay a smoothing line on top of the scatter plot using the default method.
-4.  BONUS (optional): Overlay a smoothing line on top of the scatter plot using the default *loess* method, but make it less smooth. Hint: see `?loess`.
 
 Scales
 ======
@@ -376,7 +385,7 @@ Scales
 Scales: Controlling Aesthetic Mapping
 -------------------------------------
 
-Aesthetic mapping (i.e., with `aes()`) only says that a variable should be mapped to an aesthetic. It doesn't say *how* that should happy. For example, when mapping a variable to *shape* with `aes(shape ` x)= you don't say *what* shapes should be used. Similarly, `aes(color ` z)= doesn't say *what* colors should be used. Describing what colors/shapes/sizes etc. to use is done by modifying the corresponding *scale*. In `ggplot2` scales include
+Aesthetic mapping (i.e., with `aes()`) only says that a variable should be mapped to an aesthetic. It doesn't say *how* that should happen. For example, when mapping a variable to *shape* with `aes(shape ` x)= you don't say *what* shapes should be used. Similarly, `aes(color ` z)= doesn't say *what* colors should be used. Describing what colors/shapes/sizes etc. to use is done by modifying the corresponding *scale*. In `ggplot2` scales include
 
 -   position
 -   color and fill
@@ -404,7 +413,7 @@ Specific scale functions may have additional arguments; for example, the `scale_
 Scale Modification Examples
 ---------------------------
 
-Start by constructing a dotplot showing the distribution of home values by Date and State.
+Start by constructing a dotplot showing the distribution of home values by Date and State. Note that color varies by Date.
 
 ```{r}
   p3 <- ggplot(housing,
@@ -418,13 +427,11 @@ Start by constructing a dotplot showing the distribution of home values by Date 
                          position = position_jitter(width = 0.25, height = 0)))
 ```
 
-Now modify the breaks and labels for the x axis and color scales
+Now modify the label for the x axis, as well as the "breaks" for the color scale. Compare this figure to the previous one.
 
 ```{r}
   p4 + scale_x_discrete(name="State Abbreviation") +
-    scale_color_continuous(name="",
-                           breaks = c(19751, 19941, 20131),
-                           labels = c(1971, 1994, 2013))
+    scale_colour_gradient(breaks = c(1976, 1994, 2013))
 ```
 
 Next change the low and high values to blue and red:
@@ -432,10 +439,8 @@ Next change the low and high values to blue and red:
 ```{r}
   p4 +
     scale_x_discrete(name="State Abbreviation") +
-    scale_color_continuous(name="",
-                           breaks = c(19751, 19941, 20131),
-                           labels = c(1971, 1994, 2013),
-                           low = "blue", high = "red")
+	scale_colour_gradient(low = "blue", high = "red", breaks = c(1976, 1994, 2013))
+
 ```
 
 We can use the function `muted` from the `scales` package to modify red and blue values.
@@ -449,9 +454,7 @@ install.packages("scales")
 ```{r}
 library(scales)
   p4 +
-    scale_color_continuous(name="",
-                           breaks = c(19751, 19941, 20131),
-                           labels = c(1971, 1994, 2013),
+    scale_color_continuous(breaks = c(1976, 1994, 2013),
                            low = muted("blue"), high = muted("red"))
 ```
 
@@ -463,34 +466,17 @@ ggplot2 has a wide variety of color scales; here is an example using `scale_colo
 ```{r}
   p4 +
     scale_color_gradient2(name="",
-                          breaks = c(19751, 19941, 20131),
-                          labels = c(1971, 1994, 2013),
+                          breaks = c(1976, 1994, 2013),
                           low = muted("blue"),
                           high = muted("red"),
                           mid = "gray60",
-                          midpoint = 19941)
+                          midpoint = 1994)
 ```
 
 Available Scales
 ----------------
 
--   Partial combination matrix of available scales
-
-| **Scale**                  | **Types**  | **Examples**                     |
-|----------------------------|------------|----------------------------------|
-| scale<sub>color</sub>\_    | identity   | scale<sub>fillcontinuous</sub>   |
-| scale<sub>fill</sub>\_     | manual     | scale<sub>colordiscrete</sub>    |
-| scale<sub>size</sub>\_     | continuous | scale<sub>sizemanual</sub>       |
-|                            | discrete   | scale<sub>sizediscrete</sub>     |
-| scale<sub>shape</sub>\_    | discrete   | scale<sub>shapediscrete</sub>    |
-| scale<sub>linetype</sub>\_ | identity   | scale<sub>shapemanual</sub>      |
-|                            | manual     | scale<sub>linetypediscrete</sub> |
-| scale<sub>x</sub>\_        | continuous | scale<sub>xcontinuous</sub>      |
-| scale<sub>y</sub>\_        | discrete   | scale<sub>ydiscrete</sub>        |
-|                            | reverse    | scale<sub>xlog</sub>             |
-|                            | log        | scale<sub>yreverse</sub>         |
-|                            | date       | scale<sub>xdate</sub>            |
-|                            | datetime   | scale<sub>ydatetime</sub>        |
+You can browse the available scales here: <http://ggplot2.tidyverse.org/reference/index.html#section-scales>.
 
 Note that in RStudio you can type `scale_` followed by TAB to get the whole list of available scales.
 
@@ -536,6 +522,13 @@ We can remedy the deficiencies of the previous plot by faceting by state rather 
 ```
 
 There is also a `facet_grid()` function for faceting in two dimensions.
+
+Exercise IV
+------------
+
+1. Create a scatterplot with CPI on the x axis, HDI on the y axis, add a straight smoothing line, and facet and color by Region.
+
+
 
 Themes
 ======
@@ -590,6 +583,9 @@ You can create new themes, as in the following example:
 ```
 
 If you create a custom theme, think about the following: will others be able to read it? How will it look when printed? 
+
+Exercise V
+------------
 
 
 The \#1 FAQ
@@ -870,25 +866,3 @@ And here it is, our final version!
 ![](images/econScatter10.png)
 
 Comparing it to the original suggests that we've got most of the important elements, though of course the two graphs are not identical. ![](images/Economist1.png)
-
-Wrap-up
-=======
-
-Help Us Make This Workshop Even Better!
----------------------------------------
-
--   Please take a moment to fill out a very short feedback form
--   These workshops exist for you -- tell us what you need!
--   <http://tinyurl.com/R-graphics-feedback>
-
-Additional resources
---------------------
-
--   ggplot2 resources
-    -   Mailing list: <http://groups.google.com/group/ggplot2>
-    -   Wiki: <https://github.com/hadley/ggplot2/wiki>
-    -   Website: <http://had.co.nz/ggplot2/>
-    -   StackOverflow: <http://stackoverflow.com/questions/tagged/ggplot>
--   IQSS resources
-    -   Research technology consulting: <http://projects.iq.harvard.edu/rtc>
-    -   Workshops: <http://projects.iq.harvard.edu/rtc/filter_by/workshops>

@@ -19,3 +19,5 @@ ggplot(dat, aes(x=CPI, y=HDI))+geom_point()
 ```
 
 ## Figure 2
+
+Start including your work here!
